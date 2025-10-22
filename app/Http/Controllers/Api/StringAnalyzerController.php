@@ -101,12 +101,20 @@ class StringAnalyzerController extends Controller
             ];
 
             //? return response
-            return response()->json([
-                'message' => $stringAnalyzerServiceResult->message,
-                "status" => $stringAnalyzerServiceResult->status,
-                "data" => $data,
-            ], $stringAnalyzerServiceResult->code, ['Content-Type' => 'application/json']);
+            // return response()->json([
+            //     'message' => $stringAnalyzerServiceResult->message,
+            //     "status" => $stringAnalyzerServiceResult->status,
+            //     $data
+            // ], $stringAnalyzerServiceResult->code, ['Content-Type' => 'application/json']);
+
+            return response()->json(
+                $data,
+                $stringAnalyzerServiceResult->code,
+                ['Content-Type' => 'application/json']
+            );
         } catch (\Exception $e) {
+            Log::error("Error occured while processing this request: " . $e->getMessage());
+
             return response()->json([
                 'message' => "An error occurred while processing the request.",
                 "status" => "error",
@@ -159,11 +167,17 @@ class StringAnalyzerController extends Controller
             // dd($data);
 
             //? return response
-            return response()->json([
-                'status' => 'success',
-                'message' => $stringAnalyzerServiceResult->message,
-                'data' => $data,
-            ], $stringAnalyzerServiceResult->code, ['Content-Type' => 'application/json']);
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => $stringAnalyzerServiceResult->message,
+            //     'data' => $data,
+            // ], $stringAnalyzerServiceResult->code, ['Content-Type' => 'application/json']);
+
+            return response()->json(
+                $data,
+                $stringAnalyzerServiceResult->code,
+                ['Content-Type' => 'application/json']
+            );
         } catch (\Exception $e) {
             Log::error("Error occured while processing this request: " . $e->getMessage());
 
